@@ -1,0 +1,30 @@
+{
+  "name": "shortener",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch ./src/index.ts",
+    "migration:generate": "npx drizzle-kit generate",
+    "migration:migrate": "npx drizzle-kit migrate"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "16.4.7",
+    "drizzle-orm": "0.41.0",
+    "express": "4.21.2",
+    "nanoid": "5.1.5",
+    "pg": "8.14.1",
+    "url-join": "5.0.0",
+    "zod": "3.24.2"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.1",
+    "@types/pg": "8.11.11",
+    "drizzle-kit": "0.30.5",
+    "prettier": "3.5.3",
+    "tsx": "4.19.3",
+    "typescript": "5.8.2"
+  }
+}
