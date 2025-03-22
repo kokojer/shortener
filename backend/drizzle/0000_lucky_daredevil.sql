@@ -13,3 +13,5 @@ CREATE TABLE "visits" (
 	"ip" varchar(255) NOT NULL,
 	"date" timestamp
 );
+--> statement-breakpoint
+ALTER TABLE "visits" ADD CONSTRAINT "visits_link_id_links_id_fk" FOREIGN KEY ("link_id") REFERENCES "public"."links"("id") ON DELETE cascade ON UPDATE no action;

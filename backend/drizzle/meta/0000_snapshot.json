@@ -1,5 +1,5 @@
 {
-  "id": "64f9f748-8fa9-4de6-8df4-a25bf8b09df3",
+  "id": "cb707a9d-70d8-4b71-b0aa-747cc33f8a03",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -108,7 +108,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "visits_link_id_links_id_fk": {
+          "name": "visits_link_id_links_id_fk",
+          "tableFrom": "visits",
+          "tableTo": "links",
+          "columnsFrom": [
+            "link_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
