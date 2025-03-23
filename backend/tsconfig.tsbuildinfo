@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/db/index.ts","./src/db/schema.ts","./src/schemas/input.ts","./drizzle.config.ts"],"errors":true,"version":"5.8.2"}

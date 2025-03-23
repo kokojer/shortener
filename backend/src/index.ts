@@ -4,7 +4,7 @@ import { db } from "./db";
 import { linksTable, visitsTable } from "./db/schema";
 import { nanoid } from "nanoid";
 import urlJoin from "url-join";
-import { and, count, desc, eq, gte } from "drizzle-orm";
+import { and, count, desc, eq, gte, isNull, or } from "drizzle-orm";
 
 const app = express();
 const PORT = 3000;
@@ -59,7 +59,10 @@ app.get("/:short_id", async (req, res) => {
       .where(
         and(
           eq(linksTable.short_id, short_id),
-          gte(linksTable.expires_at, new Date()),
+          or(
+            isNull(linksTable.expires_at),
+            gte(linksTable.expires_at, new Date()),
+          ),
         ),
       )
       .then((res) => res[0]);
@@ -68,7 +71,6 @@ app.get("/:short_id", async (req, res) => {
       res.status(404).send(`Ccылка не найдена!`);
       return;
     }
-
     if (req.ip) {
       await db.insert(visitsTable).values({
         link_id: link.id,
@@ -118,7 +120,14 @@ app.delete("/delete/:short_id", async (req, res) => {
   const { short_id } = req.params;
 
   try {
-    await db.delete(linksTable).where(eq(linksTable.short_id, short_id));
+    const result = await db
+      .delete(linksTable)
+      .where(eq(linksTable.short_id, short_id));
+
+    if (!result.rowCount) {
+      res.status(404).send("Переданной ссылки не существует!");
+      return;
+    }
 
     res.status(204).send();
   } catch (e) {
